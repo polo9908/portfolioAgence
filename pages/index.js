@@ -1,11 +1,19 @@
+import { GET_ALL_POSTS } from '@/graphql/queries';
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Link from 'next/link';
+import Styles from "./../styles/Home.module.css"
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
 
-const inter = Inter({ subsets: ['latin'] })
+export default function Home({ posts }) {
+  const headerBackgroundColor = "white";
+  const linkColor = "#8CAC31";
+  const iconAirbus = "#8CAC31"
+  // Séparer les posts en deux tableaux pour CardLeft et CardRight
+  const leftPosts = posts.filter((_, index) => index % 2 === 0);
+  const rightPosts = posts.filter((_, index) => index % 2 !== 0);
 
-export default function Home() {
   return (
     <>
       <Head>
@@ -14,101 +22,88 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
+      <Header backgroundColor={headerBackgroundColor} linkColor={linkColor} iconAirbus={iconAirbus}/>
+      <div className={Styles.Home}>
+        <h1>
+          Sites Web Sur-Mesure
+          <br />
+          Spécialisation en UX/UI
+        </h1>
+      </div>
+      <div className={Styles.TitleRealisations}>
+        <h2>Réalisations</h2>
+      </div>
+      <div className={Styles.Sections} id="realisations">
+        <div className={Styles.CardLeft}>
+          {leftPosts.map((val, i) => {
+            const STRAPI_BASE_URL = "http://localhost:1337"; // Remplacez par l'URL de votre serveur Strapi
+            let imageUrl = STRAPI_BASE_URL + val.attributes.illustration.data.attributes.url
+            return (
+
+            <div key={i} className={Styles.Card}>
+              <Link className={Styles.Link} href={`/${val.attributes.slug}`}>
+                <div className={Styles.informations_haut}>
+                  <p>{val.attributes.competences}</p>
+                  <h3>{val.attributes.entreprise}</h3>
+                </div>
+                <div className={Styles.ContainerImage}>
+                  <img className={Styles.Image} src={imageUrl} alt={val.attributes.entreprise} />
+                </div>
+                <div className={Styles.informations_bas }>
+                  <p>{val.attributes.date}</p>
+                  <p>{val.attributes.technologies}</p>
+                </div>
+              </Link>
+            </div>
+            )
+          }
+          )}
         </div>
+        <div className={Styles.CardRight}>
+          {rightPosts.map((val, i) => {
+            const STRAPI_BASE_URL = "http://localhost:1337"; // Remplacez par l'URL de votre serveur Strapi
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+            let imageUrl = STRAPI_BASE_URL + val.attributes.illustration.data.attributes.url
+            return (
+            <div key={i} className={Styles.Card}>
+              <Link className={Styles.Link} href={`/${val.attributes.slug}`}>
+                <div className={Styles.informations_haut}>
+                  <p>{val.attributes.competences}</p>
+                  <h3>{val.attributes.entreprise}</h3>
+                </div>
+                <div className={Styles.ContainerImage}>
+                  <img className={Styles.Image} src={imageUrl} alt={val.attributes.entreprise} />
+                </div>
+                <div className={Styles.informations_bas }>
+                  <p>{val.attributes.date}</p>
+                  <p>{val.attributes.technologies}</p>
+                </div>
+              </Link>
+            </div>
+            )
+          }
+          )}
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      </div>
+      <Footer/>
     </>
-  )
+  );
+}
+
+
+export async function getStaticProps(){
+  const client = new ApolloClient({
+    uri: "http://localhost:1337/graphql",
+    cache: new InMemoryCache()
+  });
+
+  const {data} = await client.query({
+    query: GET_ALL_POSTS
+  })
+  
+  return {
+    props: {
+      posts: data.realisations.data
+    }
+  }
 }

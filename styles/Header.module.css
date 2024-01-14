@@ -1,0 +1,91 @@
+/* components/Header.module.css */
+
+
+.header {
+  position: fixed;
+  z-index: 1;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  background: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  width: 40%;
+  padding-left: 5%;
+}
+
+.navbar .Image {
+  display: none;
+}
+
+.navbar a {
+  color: #79a00d;
+  text-decoration: none;
+  font-size: 1vw;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+      height: 9%;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+  }
+
+  .navbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      padding-left: 0;
+  }
+
+  .navbar .Image {
+    display: block;
+    height:40px;
+  }
+
+  .navbar a {
+    font-size: 2vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 600px) {
+.header {
+    height: 10%;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 0;
+}
+
+.navbar .Image {
+  display: block;
+  height:35px;
+}
+
+.navbar a {
+    font-size: 3vw;
+    height: 70%;
+}
+}
+

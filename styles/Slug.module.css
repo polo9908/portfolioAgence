@@ -1,0 +1,55 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(180deg, #247BE0 10%, #26BBDC 100%);
+}
+.Container>.ContainerSlide {
+    height:100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.Container>.ContainerSlide>.Image 
+{
+    height: 50%;
+    width: 50%;
+}
+.largeTitle {
+    font-size: 9em;
+    color: white;
+    transition: font-size 2s, transform 2s; /* Smooth transition */
+}
+
+.smallTitle {
+    font-size: 3em;
+    color: white;
+    transform: translateY(90vh); /* Move to the bottom of the container */
+    transition: font-size 2s, transform 2s; /* Smooth transition */
+}
+
+@media screen and (max-width: 600px) {
+    .largeTitle {
+        font-size: 6em;
+        color: white;
+        transition: font-size 2s, transform 2s; /* Smooth transition */
+    }
+    
+    .smallTitle {
+        font-size: 3em;
+        color: white;
+        transform: translateY(-14vh); /* Move to the bottom of the container */
+        transition: font-size 2s, transform 2s; /* Smooth transition */
+    }
+    .Container 
+    {
+        flex-direction: column;
+    }
+    .Container>.ContainerSlide {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
