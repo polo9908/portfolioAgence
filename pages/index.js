@@ -37,6 +37,7 @@ export default function Home({ posts }) {
         <div className={Styles.CardLeft}>
           {leftPosts.map((val, i) => {
             const STRAPI_BASE_URL = "http://localhost:1337"; // Remplacez par l'URL de votre serveur Strapi
+            console.log(val.attributes.slug);
             let imageUrl = STRAPI_BASE_URL + val.attributes.illustration.data.attributes.url
             return (
 
@@ -61,8 +62,8 @@ export default function Home({ posts }) {
         </div>
         <div className={Styles.CardRight}>
           {rightPosts.map((val, i) => {
+            console.log(val);
             const STRAPI_BASE_URL = "http://localhost:1337"; // Remplacez par l'URL de votre serveur Strapi
-
             let imageUrl = STRAPI_BASE_URL + val.attributes.illustration.data.attributes.url
             return (
             <div key={i} className={Styles.Card}>
